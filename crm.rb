@@ -8,6 +8,10 @@ class CRM
 		@rolodex = Rolodex.new
 	end
 
+
+# ==============================
+# DISPLAY CONTACTS
+# ==============================
 	def print_main_menu 
 		puts "Welcome to #{@name}"
 		puts "[1] Add a contact"
@@ -59,10 +63,16 @@ class CRM
 
 	def display_all_contacts
 		@rolodex.contacts.each do |contact|
-			puts "#{contact.first_name} #{contact.last_name} #{contact.email} #{contact.note}"
+			puts "First Name:#{contact.first_name}" 
+			puts "Last Name: #{contact.last_name}"
+			puts "Email Address:#{contact.email}" 
+			puts "Note: #{contact.note}"
 		end
 	end
 
+# ==============================
+# MODIFY CONTACTS
+# ==============================
 	def print_modify_contact		
 		puts "---------------------"
 		puts "[1] Modify first name"
@@ -96,6 +106,14 @@ class CRM
 			when 4 then modify_note
 			when 5 then	main_menu
 		end
+	end
+
+	def modify_first_name
+		puts "What is the id of the person whose name you want to change?"
+		modify_for_id = gets.chomp.to_i
+
+		name = @rolodex.find_by_id(modify_for_id)
+		puts "Your first name is: #{name}"
 	end
 
 
