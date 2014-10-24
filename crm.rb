@@ -31,12 +31,12 @@ class CRM
 
 	def choose_option(option)
 		case option
-		when 1 then add_contact
-		when 2 then modify_contact
-		when 3 then display_all_contacts
-		when 4 then display_contact
-		when 5 then display_attribute
-		when 6 then delete_contact
+			when 1 then add_contact
+			when 2 then modify_contact
+			when 3 then display_all_contacts
+			when 4 then display_contact
+			when 5 then display_attribute
+			when 6 then delete_contact
 		else
 			puts "Invalid option. Try again!"
 			return
@@ -63,27 +63,32 @@ class CRM
 		end
 	end
 
-	def print_modify_contact
-		puts "What attribute do you want to modify (enter a number)"
+	def print_modify_contact		
+		puts "---------------------"
 		puts "[1] Modify first name"
 		puts "[2] Modify last name"
 		puts "[3] Modify email"
 		puts "[4] Modify note"
 		puts "[5] Cancel"
+		puts "What attribute do you want to modify (enter a number)"
 	end
 
 	def modify_contact
-		print_modify_contact	
-		# modify_attribute = gets.chomp
+		print_modify_contact
+  	modify_attribute = gets.chomp.to_i
+  	modify_contact_option(modify_attribute)
 	end
 
-		# def main_menu
-		# while true
-		# 	print_main_menu
-		# 	input = gets.chomp.to_i
-		# 	return if input == 7
-		# 	choose_option(input)
-		# end
+	def modify_contact_option(option)
+		case option
+			when 1 then modify_first_name
+			when 2 then modify_last_name
+			when 3 then modify_email
+			when 4 then modify_note
+			when 5 then	main_menu
+		end
+	end
+
 
 end
 
