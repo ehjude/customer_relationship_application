@@ -111,9 +111,11 @@ class CRM
 	def modify_first_name
 		puts "What is the id of the person whose name you want to change?"
 		modify_for_id = gets.chomp.to_i
-
 		name = @rolodex.find_by_id(modify_for_id)
 		puts "Your first name is: #{name}"
+		puts "What do you want to change this name to?"
+		new_first_name = gets.chomp
+
 	end
 
 
