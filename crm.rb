@@ -76,7 +76,16 @@ class CRM
 	def modify_contact
 		print_modify_contact
   	modify_attribute = gets.chomp.to_i
-  	modify_contact_option(modify_attribute)
+
+  	main_menu if modify_attribute == 5  	
+  	
+  	puts "Are you sure you want to change this attribute [Y/N]"
+  	confirm = gets.chomp
+  	if confirm.downcase == "y"
+  		modify_contact_option(modify_attribute)
+  	else
+  		modify_contact
+  	end
 	end
 
 	def modify_contact_option(option)
