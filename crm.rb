@@ -63,18 +63,27 @@ class CRM
 		end
 	end
 
-	# def modify_contact
-	# 	puts "What attribute do you want to modify (enter a number)"
-	# 	puts "[1] Modify first name"
-	# 	puts "[2] Modify last name"
-	# 	puts "[3] Modify email"
-	# 	puts "[4] Modify note"
-	# 	puts "[5] Cancel"
+	def print_modify_contact
+		puts "What attribute do you want to modify (enter a number)"
+		puts "[1] Modify first name"
+		puts "[2] Modify last name"
+		puts "[3] Modify email"
+		puts "[4] Modify note"
+		puts "[5] Cancel"
+	end
 
-		
+	def modify_contact
+		print_modify_contact	
+		# modify_attribute = gets.chomp
+	end
 
-	# 	modify_attribute = gets.chomp
-	# end
+		# def main_menu
+		# while true
+		# 	print_main_menu
+		# 	input = gets.chomp.to_i
+		# 	return if input == 7
+		# 	choose_option(input)
+		# end
 
 end
 
