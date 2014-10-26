@@ -12,18 +12,6 @@ class CRM
 # ==============================
 # DISPLAY CONTACTS
 # ==============================
-	def print_main_menu 
-		puts "Welcome to #{@name}"
-		puts "[1] Add a contact"
-		puts "[2] Modify a contact"
-		puts "[3] Display all contacts"
-		puts "[4] Display one contact"
-		puts "[5] Display an attribute"	
-		puts "[6] Delete a contact"
-		puts "[7] Exit"
-		puts "Enter a number:"
-	end
-
 	def main_menu
 		while true
 			print_main_menu
@@ -33,6 +21,18 @@ class CRM
 		end
 	end
 
+	def print_main_menu 
+		puts "Welcome to #{@name}"
+		puts "[1] Add a contact"
+		puts "[2] Modify a contact"
+		puts "[3] Display all contacts"
+		puts "[4] Display one contact"
+		puts "[5] Display an attribute"	
+		puts "[6] Delete a contact"
+		puts "[7] Exit"
+		puts "Enter a number:"		
+	end
+
 	def choose_option(option)
 		case option
 			when 1 then add_contact
@@ -40,7 +40,7 @@ class CRM
 			when 3 then display_all_contacts
 			when 4 then display_contact
 			when 5 then display_attribute
-			when 6 then delete_contact
+			when 6 then delete_which_contact
 		else
 			puts "Invalid option. Try again!"
 			return
@@ -61,18 +61,54 @@ class CRM
 		@rolodex.add_contact(contact)
 	end
 
+# ==============================
+# DISPLAY CONTACTS
+# ==============================
+
 	def display_all_contacts
-		@rolodex.contacts.each do |contact|
-			puts "First Name:#{contact.first_name}" 
-			puts "Last Name: #{contact.last_name}"
-			puts "Email Address:#{contact.email}" 
-			puts "Note: #{contact.note}"
+		@rolodex.contacts.each do |user|
+			puts "First Name:#{user.first_name}" 
+			puts "Last Name: #{user.last_name}"
+			puts "Email Address:#{user.email}" 
+			puts "Note: #{user.note}"
 		end
+	end
+
+	def display_contact
+		puts "What is the ID of the contact you want to display?"
+		display_id = gets.chomp.to_i			
+		
+		@rolodex.contacts.each do |user|
+			if user.id == display_id	
+				puts "First Name:#{user.first_name}" 
+				puts "Last Name: #{user.last_name}"
+				puts "Email Address:#{user.email}" 
+				puts "Note: #{user.note}"
+			end
+		end		
+
 	end
 
 # ==============================
 # MODIFY CONTACTS
 # ==============================
+	def modify_contact
+		print_modify_contact
+  	modify_attribute = gets.chomp.to_i
+
+  	if modify_attribute == 5  	
+  		main_menu 
+  	else 
+	  	puts "Are you sure you want to change this attribute [Y/N]"
+	  	confirm = gets.chomp
+	  	if confirm.downcase == "y"
+	  		modify_contact_option(modify_attribute)
+	  	else
+	  		modify_contact
+	  	end
+	  end
+	end	
+
 	def print_modify_contact		
 		puts "---------------------"
 		puts "[1] Modify first name"
@@ -81,21 +117,7 @@ class CRM
 		puts "[4] Modify note"
 		puts "[5] Cancel"
 		puts "What attribute do you want to modify (enter a number)"
-	end
-
-	def modify_contact
-		print_modify_contact
-  	modify_attribute = gets.chomp.to_i
-
-  	main_menu if modify_attribute == 5  	
-  	
-  	puts "Are you sure you want to change this attribute [Y/N]"
-  	confirm = gets.chomp
-  	if confirm.downcase == "y"
-  		modify_contact_option(modify_attribute)
-  	else
-  		modify_contact
-  	end
+		puts "---------------------"		
 	end
 
 	def modify_contact_option(option)
@@ -110,16 +132,26 @@ class CRM
 
 	def modify_first_name
 		puts "What is the id of the person whose name you want to change?"
-		modify_for_id = gets.chomp.to_i
-		name = @rolodex.find_by_id(modify_for_id)
-		puts "Your first name is: #{name}"
+		modify_id = gets.chomp.to_i
+		name = @rolodex.find_by_id(modify_id)
+		puts "#ID #{modify_id}'s first name is: #{name}"
 		puts "What do you want to change this name to?"
 		new_first_name = gets.chomp
-
+		change_first_name(modify_id, new_first_name)
 	end
 
+# ==============================
+# DELETE CONTACTS
+# ==============================
+
+	def delete_which_contact
+		puts "What is the ID of the contact you want to delete?"
+		user_id = gets.chomp.to_i
+		@rolodex.delete_contact(user_id)
+	end
 
 end
+
 
 crm = CRM.new("Bitmaker Labs")
 crm.main_menu
