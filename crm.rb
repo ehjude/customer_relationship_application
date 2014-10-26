@@ -141,6 +141,46 @@ class CRM
 	end
 
 # ==============================
+# DISPLAY ATTRIBUTES
+# ==============================
+
+	def display_attribute
+		print_display_attribute
+		show_attribute = gets.chomp.to_i
+
+		if show_attribute == 5  	
+  		main_menu 
+  	else 
+  		print_attribute(show_attribute)
+  	end
+	end
+
+	def print_display_attribute		
+		puts "---------------------"
+		puts "What attribute do you want to find a user by (enter a number)"		
+		puts "[1] First name"
+		puts "[2] Last name"
+		puts "[3] Email"
+		puts "[4] Note"
+		puts "[5] Cancel"
+		puts "---------------------"		
+	end
+
+	def print_attribute(attribute_choice)
+		case attribute_choice
+			when 1 then display_first_name
+			when 2 then display_last_name	
+			when 3 then display_email_name	
+			when 4 then display_name				
+		end
+	end
+
+	def display_first_name
+		puts "What first name do you want to search for?"
+		first_name = gets.chomp
+	end
+	
+# ==============================
 # DELETE CONTACTS
 # ==============================
 
