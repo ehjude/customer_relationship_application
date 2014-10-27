@@ -137,7 +137,7 @@ class CRM
 		puts "#ID #{modify_id}'s first name is: #{name}"
 		puts "What do you want to change this name to?"
 		new_first_name = gets.chomp
-		change_first_name(modify_id, new_first_name)
+		@rolodex.change_first_name(modify_id, new_first_name)
 	end
 
 # ==============================
@@ -179,7 +179,7 @@ class CRM
 		puts "What first name do you want to search for?"
 		first_name = gets.chomp
 	end
-	
+
 # ==============================
 # DELETE CONTACTS
 # ==============================
